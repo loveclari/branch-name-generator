@@ -1,32 +1,48 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>Feature BRANCH Generator</title>
+		<title>Branch Name Generator</title>
 		<script>
-			function generateFeatureUrl() {
+			function generateBranchName() {
 				const phrase = document.getElementById("phraseInput").value;
+				const type = document.querySelector(
+					'input[name="branchType"]:checked'
+				).value;
 
 				const lowercasePhrase = phrase.toLowerCase();
-
 				const words = lowercasePhrase.split(" ");
-
 				const dashedWords = words.join("-");
 
-				const featureUrl = "feature/" + dashedWords;
-
-				document.getElementById("result").textContent = featureUrl;
+				const branchName = type + "/" + dashedWords;
+				document.getElementById("result").textContent = branchName;
 			}
 		</script>
 	</head>
 	<body>
-		<h1>Feature BRANCH Generator</h1>
+		<h1>Branch Name Generator</h1>
 
 		<label for="phraseInput">Enter a phrase:</label>
-
 		<input type="text" id="phraseInput" />
-		<button onclick="generateFeatureUrl()">
-			Generate Feature Branch Name
-		</button>
+
+		<p>Select branch type:</p>
+		<input
+			type="radio"
+			id="featureRadio"
+			name="branchType"
+			value="feature"
+			checked />
+		<label for="featureRadio">Feature</label>
+
+		<input type="radio" id="bugfixRadio" name="branchType" value="bugfix" />
+		<label for="bugfixRadio">Bugfix</label>
+
+		<input type="radio" id="hotfixRadio" name="branchType" value="hotfix" />
+		<label for="hotfixRadio">Hotfix</label>
+
+		<input type="radio" id="choreRadio" name="branchType" value="chore" />
+		<label for="choreRadio">Chore</label>
+
+		<button onclick="generateBranchName()">Generate Branch Name</button>
 
 		<h2>Result:</h2>
 		<p id="result"></p>
